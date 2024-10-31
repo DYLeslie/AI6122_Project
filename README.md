@@ -559,7 +559,7 @@ Enter your choice (1-5):
  
 ## 4. Comparison Results Analysis Tool
 
-The **Comparison Results Analysis Tool** is a command-line application designed to help users quickly filter and analyze sentences extracted from reviews containing comparative statements.
+The **Comparison Results Analysis Tool** is a command-line application designed to help users quickly filter and analyze sentences extracted from reviews containing comparative statements. This tool enables users to filter comparisons by type, specific keywords, subjects, or display specific rows within a selected range. The tool provides easy access to comparison data, such as determining positive or negative sentiment and identifying subjects in the comparisons.
 
 ### Features
 
@@ -569,40 +569,9 @@ The **Comparison Results Analysis Tool** is a command-line application designed 
 - **Filter by Subject:** Find all comparisons involving a specific subject.
 - **Display Row Range:** View comparisons within a specified row range.
 
-### Requirements
-
-- **Python 3.x**
-- **Python Packages:**
-  - `pandas`
-  - `tabulate`
-  - `spaCy` (with the `en_core_web_sm` model)
-
-### Installation
-
-#### Step 1: Clone the Repository
-
-```bash
-git clone <repository-url>
-```
-
-#### Step 2: Install Dependencies
-
-```bash
-pip install pandas tabulate spacy
-python -m spacy download en_core_web_sm
-```
-
-### Running the Application
-
-To start the application:
-
-```bash
-python comparison_analysis_tool.py
-```
-
 ### Usage Guide
 
-After running, a menu will appear with several options:
+Upon running the script, a menu will appear with several options:
 
 ```plaintext
 ==================================================
