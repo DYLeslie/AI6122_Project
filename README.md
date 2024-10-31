@@ -957,7 +957,7 @@ Enter your choice (1 or 2): 1
 - **Option Selected**: The user selected **Option 4** for **Review Summary** from the main menu.
 - **Sub-option Selected**: Within the review summary options, the user selected **Option 1**, which is to **Plot Review Distribution**.
 - **Results**:
-  - The displayed graph is titled **"Distribution of reviews contributed by users"**.
+  - The displayed graph is Distribution of reviews contributed by users.
   - The x-axis represents the **Number of reviews** contributed by users.
   - The y-axis represents the **Number of users** having a specific number of reviews.
   - Each red dot on the graph represents the count of users that have contributed a specific number of reviews. For instance, a large number of users have contributed just a few reviews, as shown by the dot at the 5-reviews mark, and there are fewer users as the number of reviews increases.
