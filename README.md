@@ -571,7 +571,7 @@ The **Comparison Results Analysis Tool** is a command-line application designed 
 
 ### Usage Guide
 
-After running, a menu will appear with several options:
+Upon running the script, a menu will appear with several options:
 
 ```plaintext
 ==================================================
