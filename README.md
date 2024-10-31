@@ -2,17 +2,275 @@
 # Installation Guide and Usage Instructions
 
 ## Table of Contents
-
-1. [Installation Guide and Usage Instructions of Search Engine](#1-installation-guide-and-usage-instructions-of-search-engine)
-2. [Running Yelp Data Analysis on Google Colab](#2-running-yelp-data-analysis-on-google-colab)
-3. [Running Comprehensive Text Analysis on Google Colab](#3-running-comprehensive-text-analysis-on-google-colab)
+1. [Running Yelp Data Analysis on Google Colab](#1-running-yelp-data-analysis-on-google-colab)
+2. [Running Comprehensive Text Analysis on Google Colab](#2-running-comprehensive-text-analysis-on-google-colab)
+3. [Installation Guide and Usage Instructions of Search Engine](#3-installation-guide-and-usage-instructions-of-search-engine)
 4. [Comparison Results Analysis Tool](#4-comparison-results-analysis-tool)
 
+## 1. Running Yelp Data Analysis on Google Colab
 
-## 1. Installation Guide and Usage Instructions of Search Engine
+The analysis notebook, `Yelp_NJ.ipynb`, is designed to process and analyze Yelp data, which may include tasks like cleaning, exploring, and visualizing Yelp review data to uncover trends and insights about businesses, reviews, and customer sentiment. Yelp data analysis offers valuable insights into customer behavior, business trends, and regional preferences. With Google Colab, users can easily run this analysis in a cloud environment, leveraging Colab's free GPU and TPUs for faster processing. 
+
+### 1. Requirements
+
+- **Google Account**: Required to access Google Colab.
+- **Google Colab**: No installations are required on your local machine as all processing is done in Colab's cloud environment.
+- **Dataset**: The dataset should be uploaded or available in the correct path within Colab to avoid path issues.
+
+The required packages for the analysis (such as `pandas`, `numpy`, and `matplotlib`) are pre-installed on Google Colab. However, additional libraries may be installed as specified in the notebook.
+
+### 2. Setup
+
+1. **Upload the Notebook to Colab**: Open [Google Colab notebook](https://colab.research.google.com/drive/1xc-yvFelBFmcRKR-bjgMOQnkB4wVjBQf?usp=sharing) and upload the `Yelp_NJ.ipynb` file.
+
+2. **Upload or Mount Data**:
+   - If your dataset is stored locally, upload it directly into the Colab session by navigating to Files > Upload.
+   - Alternatively, if you are working with a dataset on Google Drive, mount your Google Drive to access the data directly. Run the following code cell in Colab to mount your drive:
+
+     ```python
+     from google.colab import drive
+     drive.mount('/content/drive')
+     ```
+
+3. **File Paths**: Ensure that all file paths in the notebook are updated according to your Colab environment (e.g., `/content/drive/MyDrive/...` if using Google Drive).
+
+### 3. Running the Notebook
+
+To execute the notebook:
+
+1. Start by running cells sequentially from the beginning. The notebook's cells are designed to perform:
+   - **Data Import**: Loads the Yelp data from the specified source.
+   - **Data Preprocessing**: Cleans and organizes the data.
+   - **Exploratory Data Analysis (EDA)**: Visualizes trends, distributions, and patterns in Yelp reviews.
+
+2. **Save Outputs**: You can save results or visualizations by downloading them from Colab or saving them to Google Drive.
+
+### Expected Output
+1. Baisc Statistics
+```Shell
+Total number of businesses: 8536
+
+Top 10 business categories:
+categories
+Restaurants                  3341
+Food                         1717
+Shopping                     1228
+Beauty & Spas                 819
+Home Services                 741
+Pizza                         717
+Automotive                    682
+Sandwiches                    602
+Health & Medical              595
+Event Planning & Services     570
+Name: count, dtype: int64
+
+Business rating statistics:
+count    8536.000000
+mean        3.459114
+std         0.960938
+min         1.000000
+25%         3.000000
+50%         3.500000
+75%         4.000000
+max         5.000000
+Name: stars, dtype: float64
+
+Review count statistics per business:
+count    8536.000000
+mean       29.268627
+std        49.686376
+min         5.000000
+25%         7.000000
+50%        13.000000
+75%        29.000000
+max       709.000000
+Name: review_count, dtype: float64
+
+Total number of reviews: 260897
+
+Review distribution by star ratings:
+stars
+1     51506
+2     22838
+3     25853
+4     50209
+5    110491
+Name: count, dtype: int64
+
+Average review length: 570.44 characters
+
+Review distribution by year:
+year
+2005        3
+2006      101
+2007      384
+2008      988
+2009     2045
+2010     4076
+2011     7047
+2012     9865
+2013    14410
+2014    19752
+2015    26961
+2016    29271
+2017    31698
+2018    33873
+2019    33889
+2020    21988
+2021    23416
+2022     1130
+Name: count, dtype: int64
+
+Top 10 users with the most interactions:
+                      user_id  total_votes
+427    -G7Zkl1wIWBBmD0KRy_sCw        15360
+60813  aaEr2-3Qaa4jo9rkjiqibA         5341
+46859  SeWsQoYPbQuMAqfRNNS6Jg         5210
+24410  ET8n-r7glWYqZhuR6GcdNw         4880
+77594  lRRuTimITgwzoXLIM3g9qw         3959
+99626  zUk_Ww2q1At1QSyRbUjIGQ         3887
+38188  N8ITUUDRBpo1hTNDvk1byA         3733
+40365  OXlfFHsM15JYh_lvat2w2w         3488
+27867  GcdYgbaF75vj7RO6EZhPOQ         2844
+94195  w6OPX0bAyxIFKWkGDJrtGA         2554
+```
+![image](https://github.com/user-attachments/assets/b0230c7d-d171-43a5-9bed-9f857c3e4344)
+![image](https://github.com/user-attachments/assets/02b5f257-1d95-4743-9a8d-77d21045384a)
+![image](https://github.com/user-attachments/assets/a54c3bf2-6a43-41a7-87fd-0b63d85fef6b)
+![image](https://github.com/user-attachments/assets/7c45665d-a0f5-4daf-9d47-7f5641a7934b)
+
+2. Tokenization & Stemming
+```Shell
+Selected Business IDs: ['9X2rQUHO_ka0k7tu7wr_7g', 'O2l31-gVCX2R9yRTtGPyaQ']，9X2rQUHO_ka0k7tu7wr_7g - Number of words before stemming: 1433
+9X2rQUHO_ka0k7tu7wr_7g - Number of words after stemming: 1175
+O2l31-gVCX2R9yRTtGPyaQ - Number of words before stemming: 845
+O2l31-gVCX2R9yRTtGPyaQ - Number of words after stemming: 743
+```
+![image](https://github.com/user-attachments/assets/fd8993d9-df84-497a-bf0e-4940e41c9094)
+![image](https://github.com/user-attachments/assets/a9555cce-6017-421d-a7d2-99aa665a0bfb)
+![image](https://github.com/user-attachments/assets/3b5fa1ba-b048-4252-b4f0-abf31e5cff9e)
+![image](https://github.com/user-attachments/assets/1092da21-2bc6-4c37-bd11-bf9d860e16f4)
+![image](https://github.com/user-attachments/assets/d64a30f1-1e5e-4f05-be71-ea31129cdfa1)
+![image](https://github.com/user-attachments/assets/27a6b65c-64d9-416f-9654-05415c282883)
+![image](https://github.com/user-attachments/assets/b1f482c3-fde9-4652-89eb-039186dc35b3)
+![image](https://github.com/user-attachments/assets/3c651b2a-a453-4bc6-ba70-395e7b7889d2)
+![image](https://github.com/user-attachments/assets/49cc4438-0a6c-42d6-bc5c-006f108acd40)
+![image](https://github.com/user-attachments/assets/31845f26-2f4e-4972-b905-2255e2390573)
+![image](https://github.com/user-attachments/assets/fcc90b25-b1be-4787-9b38-0839decdcd80)
+![image](https://github.com/user-attachments/assets/6aa0cd42-186f-4f9b-82c4-e7975210821a)
+![image](https://github.com/user-attachments/assets/43c9d604-937c-4eca-a39f-461730ca3ff9)
+![image](https://github.com/user-attachments/assets/25a94db9-f061-41e3-bbb9-3f12b25789ff)
+![image](https://github.com/user-attachments/assets/8a6468c4-a5fe-4590-a1ee-048af82b6110)
+![image](https://github.com/user-attachments/assets/a4da7fa0-f0fd-40c7-a68f-f0a824f6f2df)
+![image](https://github.com/user-attachments/assets/f20af904-c68a-43a0-8edf-243295ae5b4c)
+![image](https://github.com/user-attachments/assets/1de5a954-45f4-4545-8be1-3d681034c633)
+![image](https://github.com/user-attachments/assets/341427c8-d564-4894-8b84-d4756aacb17b)
+![image](https://github.com/user-attachments/assets/243b5b4b-1ed4-4ab2-b10f-4f6c211f2679)
+![image](https://github.com/user-attachments/assets/d79c619d-4a4a-43b5-9a13-3058172d6f4b)
+![image](https://github.com/user-attachments/assets/3884ad2f-3ede-4519-a748-956a3b6241c0)
+
+
+![image](https://github.com/user-attachments/assets/42f835be-c275-4fb0-85cd-faecf802b050)
+
+![image](https://github.com/user-attachments/assets/090c1133-97e3-444f-bc27-44b3af843163)
+
+![image](https://github.com/user-attachments/assets/1f21f9b0-2f84-466e-a2b8-8fee0f2d4798)
+
+![image](https://github.com/user-attachments/assets/a9010695-e608-4de1-8e58-cefca9370bb8)
+
+![image](https://github.com/user-attachments/assets/001f7f6c-d483-4711-89ab-9bd9f08dc566)
+
+![image](https://github.com/user-attachments/assets/54a8e6b3-7488-4e59-b27d-d56cb9311eb6)
+
+
+## 2. Running Comprehensive Text Analysis on Google Colab
+This guide explains how to run a comprehensive text analysis script on Google Colab. The script analyzes multiple text files (from StackOverflow, Reddit, news articles, and patents) for readability, structural elements, sentiment, and use of technical terms. This process provides insights into the writing style differences across these text types. You can start by opening this [Google Colab notebook](https://colab.research.google.com/drive/1xc-yvFelBFmcRKR-bjgMOQnkB4wVjBQf?usp=sharing).
+
+### Instructions
+
+#### Step 1: Prepare and Upload Text Files to Google Drive
+1. Organize the files you want to analyze:
+  - Ensure all text files are in `.txt` or `.pdf` format.
+  - Files should cover each of the four types: StackOverflow, Reddit, news articles, and patents, ideally two files per category.
+2. Upload all files to Google Drive:
+  - Create a folder named `TextFiles` in your Google Drive’s main directory.
+  - Place all `.txt` and `.pdf` files in this `TextFiles` folder.
+
+#### Step 2: Set Up Google Colab
+
+``1. Open Google Colab in your web browser.
+2. Create a new notebook by going to File > New Notebook.
+
+#### Step 3: Install Dependencies and Mount Google Drive
+
+Copy and paste the following code into the first cell to install necessary libraries and mount Google Drive:
+
+```python
+from google.colab import drive
+drive.mount('/content/drive')
+
+!pip install pdfplumber
+!pip install textblob
+!pip install textstat
+import nltk
+nltk.download('punkt')  # Downloads the punkt tokenizer from NLTK
+```
+
+#### Step 4: Run the Analysis Code
+
+1. In a new cell, paste the main analysis code provided.
+2. Ensure the code points to the correct directory (`/content/drive/MyDrive/TextFiles`).
+3. Run this cell to start the analysis on all uploaded files.
+
+### Expected Output
+
+Upon running, the code will analyze all files in the `TextFiles` folder. For each file, it will output details on readability, structural elements, sentiment, and uppercase word usage. The output will display results sequentially for each of the 8 files, with clear section separators, as shown below:
+
+```markdown
+==================================================
+Analyzing: stackoverflow1.txt
+==================================================
+
+Complexity and Readability:
+- Number of sentences      : 28
+- Number of words          : 680
+- Average sentence length  : 25.64 words
+- Unique words ratio       : 0.46
+- Flesch-Kincaid score     : 12.60
+
+Structural Elements:
+- Bullet points            : 0
+- Code blocks              : 0
+- Numbered items           : 0
+
+Sentiment Analysis:
+- Polarity (emotion)       : 0.20 (range -1 to 1)
+- Subjectivity             : 0.41 (range 0 to 1)
+
+Uppercase Words Analysis:
+- Uppercase words count    : 21
+- Uppercase words ratio    : 0.03
+
+Sample Sentences:
+- Enterprise 2024.7:
+- Empower your subject matter experts to contribute
+This release introduces Subject Matter Expert (SME) Auto-Assign to the Stack Overflow for Teams experience so expert knowledge is automatically captured, verified, and distributed to users.
+
+==================================================
+```
+
+The analysis will continue similarly for all 8 files, covering the four text categories.
+
+**Notes**
+- The analysis is designed to run through all uploaded files in one go, providing comprehensive results for each file.
+- Each text file’s results will display sentence and word counts, readability scores, sentiment analysis, uppercase usage, and example sentences.
+- The code is designed for English-language text analysis; adjustments may be needed for other languages.
+
+## 3. Installation Guide and Usage Instructions of Search Engine
 Welcome to the installation guide for our **Search Engine for Businesses and Reviews in New Jersey (NJ)**. This guide will help you set up the system on your machine and provide instructions on how to use it effectively.
 
-**Note:** The data and the program are available at [Kaggle: Yelp NJ Dataset](https://www.kaggle.com/datasets/dyleslie/yelp-nj). You can also directly run `search_engine.exe` if you prefer.
+**Note:** The data and the program are available at [Kaggle: Yelp NJ Dataset](https://www.kaggle.com/datasets/dyleslie/yelp-nj).  Also, we provide two different application versions: `search_engine.exe` for Windows and `search_engine` for macOS.
+
 ### Prerequisites
 
 Before setting up the system, ensure that you have the following:
@@ -299,266 +557,6 @@ Enter your choice (1-5):
 - **Instructions:**
   - Choose option `5` to exit the program.
  
-
-## 2. Running Yelp Data Analysis on Google Colab
-
-The analysis notebook, `Yelp_NJ.ipynb`, is designed to process and analyze Yelp data, which may include tasks like cleaning, exploring, and visualizing Yelp review data to uncover trends and insights about businesses, reviews, and customer sentiment. Yelp data analysis offers valuable insights into customer behavior, business trends, and regional preferences. With Google Colab, users can easily run this analysis in a cloud environment, leveraging Colab's free GPU and TPUs for faster processing. 
-
-### 1. Requirements
-
-- **Google Account**: Required to access Google Colab.
-- **Google Colab**: No installations are required on your local machine as all processing is done in Colab's cloud environment.
-- **Dataset**: The dataset should be uploaded or available in the correct path within Colab to avoid path issues.
-
-The required packages for the analysis (such as `pandas`, `numpy`, and `matplotlib`) are pre-installed on Google Colab. However, additional libraries may be installed as specified in the notebook.
-
-### 2. Setup
-
-1. **Upload the Notebook to Colab**: Open [Google Colab notebook](https://colab.research.google.com/drive/1xc-yvFelBFmcRKR-bjgMOQnkB4wVjBQf?usp=sharing) and upload the `Yelp_NJ.ipynb` file.
-
-2. **Upload or Mount Data**:
-   - If your dataset is stored locally, upload it directly into the Colab session by navigating to Files > Upload.
-   - Alternatively, if you are working with a dataset on Google Drive, mount your Google Drive to access the data directly. Run the following code cell in Colab to mount your drive:
-
-     ```python
-     from google.colab import drive
-     drive.mount('/content/drive')
-     ```
-
-3. **File Paths**: Ensure that all file paths in the notebook are updated according to your Colab environment (e.g., `/content/drive/MyDrive/...` if using Google Drive).
-
-### 3. Running the Notebook
-
-To execute the notebook:
-
-1. Start by running cells sequentially from the beginning. The notebook's cells are designed to perform:
-   - **Data Import**: Loads the Yelp data from the specified source.
-   - **Data Preprocessing**: Cleans and organizes the data.
-   - **Exploratory Data Analysis (EDA)**: Visualizes trends, distributions, and patterns in Yelp reviews.
-
-2. **Save Outputs**: You can save results or visualizations by downloading them from Colab or saving them to Google Drive.
-
-### Expected Output
-1. Baisc Statistics
-```Shell
-Total number of businesses: 8536
-
-Top 10 business categories:
-categories
-Restaurants                  3341
-Food                         1717
-Shopping                     1228
-Beauty & Spas                 819
-Home Services                 741
-Pizza                         717
-Automotive                    682
-Sandwiches                    602
-Health & Medical              595
-Event Planning & Services     570
-Name: count, dtype: int64
-
-Business rating statistics:
-count    8536.000000
-mean        3.459114
-std         0.960938
-min         1.000000
-25%         3.000000
-50%         3.500000
-75%         4.000000
-max         5.000000
-Name: stars, dtype: float64
-
-Review count statistics per business:
-count    8536.000000
-mean       29.268627
-std        49.686376
-min         5.000000
-25%         7.000000
-50%        13.000000
-75%        29.000000
-max       709.000000
-Name: review_count, dtype: float64
-
-Total number of reviews: 260897
-
-Review distribution by star ratings:
-stars
-1     51506
-2     22838
-3     25853
-4     50209
-5    110491
-Name: count, dtype: int64
-
-Average review length: 570.44 characters
-
-Review distribution by year:
-year
-2005        3
-2006      101
-2007      384
-2008      988
-2009     2045
-2010     4076
-2011     7047
-2012     9865
-2013    14410
-2014    19752
-2015    26961
-2016    29271
-2017    31698
-2018    33873
-2019    33889
-2020    21988
-2021    23416
-2022     1130
-Name: count, dtype: int64
-
-Top 10 users with the most interactions:
-                      user_id  total_votes
-427    -G7Zkl1wIWBBmD0KRy_sCw        15360
-60813  aaEr2-3Qaa4jo9rkjiqibA         5341
-46859  SeWsQoYPbQuMAqfRNNS6Jg         5210
-24410  ET8n-r7glWYqZhuR6GcdNw         4880
-77594  lRRuTimITgwzoXLIM3g9qw         3959
-99626  zUk_Ww2q1At1QSyRbUjIGQ         3887
-38188  N8ITUUDRBpo1hTNDvk1byA         3733
-40365  OXlfFHsM15JYh_lvat2w2w         3488
-27867  GcdYgbaF75vj7RO6EZhPOQ         2844
-94195  w6OPX0bAyxIFKWkGDJrtGA         2554
-```
-![image](https://github.com/user-attachments/assets/b0230c7d-d171-43a5-9bed-9f857c3e4344)
-![image](https://github.com/user-attachments/assets/02b5f257-1d95-4743-9a8d-77d21045384a)
-![image](https://github.com/user-attachments/assets/a54c3bf2-6a43-41a7-87fd-0b63d85fef6b)
-![image](https://github.com/user-attachments/assets/7c45665d-a0f5-4daf-9d47-7f5641a7934b)
-
-2. Tokenization & Stemming
-```Shell
-Selected Business IDs: ['9X2rQUHO_ka0k7tu7wr_7g', 'O2l31-gVCX2R9yRTtGPyaQ']，9X2rQUHO_ka0k7tu7wr_7g - Number of words before stemming: 1433
-9X2rQUHO_ka0k7tu7wr_7g - Number of words after stemming: 1175
-O2l31-gVCX2R9yRTtGPyaQ - Number of words before stemming: 845
-O2l31-gVCX2R9yRTtGPyaQ - Number of words after stemming: 743
-```
-![image](https://github.com/user-attachments/assets/fd8993d9-df84-497a-bf0e-4940e41c9094)
-![image](https://github.com/user-attachments/assets/a9555cce-6017-421d-a7d2-99aa665a0bfb)
-![image](https://github.com/user-attachments/assets/3b5fa1ba-b048-4252-b4f0-abf31e5cff9e)
-![image](https://github.com/user-attachments/assets/1092da21-2bc6-4c37-bd11-bf9d860e16f4)
-![image](https://github.com/user-attachments/assets/d64a30f1-1e5e-4f05-be71-ea31129cdfa1)
-![image](https://github.com/user-attachments/assets/27a6b65c-64d9-416f-9654-05415c282883)
-![image](https://github.com/user-attachments/assets/b1f482c3-fde9-4652-89eb-039186dc35b3)
-![image](https://github.com/user-attachments/assets/3c651b2a-a453-4bc6-ba70-395e7b7889d2)
-![image](https://github.com/user-attachments/assets/49cc4438-0a6c-42d6-bc5c-006f108acd40)
-![image](https://github.com/user-attachments/assets/31845f26-2f4e-4972-b905-2255e2390573)
-![image](https://github.com/user-attachments/assets/fcc90b25-b1be-4787-9b38-0839decdcd80)
-![image](https://github.com/user-attachments/assets/6aa0cd42-186f-4f9b-82c4-e7975210821a)
-![image](https://github.com/user-attachments/assets/43c9d604-937c-4eca-a39f-461730ca3ff9)
-![image](https://github.com/user-attachments/assets/25a94db9-f061-41e3-bbb9-3f12b25789ff)
-![image](https://github.com/user-attachments/assets/8a6468c4-a5fe-4590-a1ee-048af82b6110)
-![image](https://github.com/user-attachments/assets/a4da7fa0-f0fd-40c7-a68f-f0a824f6f2df)
-![image](https://github.com/user-attachments/assets/f20af904-c68a-43a0-8edf-243295ae5b4c)
-![image](https://github.com/user-attachments/assets/1de5a954-45f4-4545-8be1-3d681034c633)
-![image](https://github.com/user-attachments/assets/341427c8-d564-4894-8b84-d4756aacb17b)
-![image](https://github.com/user-attachments/assets/243b5b4b-1ed4-4ab2-b10f-4f6c211f2679)
-![image](https://github.com/user-attachments/assets/d79c619d-4a4a-43b5-9a13-3058172d6f4b)
-![image](https://github.com/user-attachments/assets/3884ad2f-3ede-4519-a748-956a3b6241c0)
-
-
-![image](https://github.com/user-attachments/assets/42f835be-c275-4fb0-85cd-faecf802b050)
-
-![image](https://github.com/user-attachments/assets/090c1133-97e3-444f-bc27-44b3af843163)
-
-![image](https://github.com/user-attachments/assets/1f21f9b0-2f84-466e-a2b8-8fee0f2d4798)
-
-![image](https://github.com/user-attachments/assets/a9010695-e608-4de1-8e58-cefca9370bb8)
-
-![image](https://github.com/user-attachments/assets/001f7f6c-d483-4711-89ab-9bd9f08dc566)
-
-![image](https://github.com/user-attachments/assets/54a8e6b3-7488-4e59-b27d-d56cb9311eb6)
-
-
-## 3. Running Comprehensive Text Analysis on Google Colab
-This guide explains how to run a comprehensive text analysis script on Google Colab. The script analyzes multiple text files (from StackOverflow, Reddit, news articles, and patents) for readability, structural elements, sentiment, and use of technical terms. This process provides insights into the writing style differences across these text types. You can start by opening this [Google Colab notebook](https://colab.research.google.com/drive/1xc-yvFelBFmcRKR-bjgMOQnkB4wVjBQf?usp=sharing).
-
-### Instructions
-
-#### Step 1: Prepare and Upload Text Files to Google Drive
-1. Organize the files you want to analyze:
-  - Ensure all text files are in `.txt` or `.pdf` format.
-  - Files should cover each of the four types: StackOverflow, Reddit, news articles, and patents, ideally two files per category.
-2. Upload all files to Google Drive:
-  - Create a folder named `TextFiles` in your Google Drive’s main directory.
-  - Place all `.txt` and `.pdf` files in this `TextFiles` folder.
-
-#### Step 2: Set Up Google Colab
-
-``1. Open Google Colab in your web browser.
-2. Create a new notebook by going to File > New Notebook.
-
-#### Step 3: Install Dependencies and Mount Google Drive
-
-Copy and paste the following code into the first cell to install necessary libraries and mount Google Drive:
-
-```python
-from google.colab import drive
-drive.mount('/content/drive')
-
-!pip install pdfplumber
-!pip install textblob
-!pip install textstat
-import nltk
-nltk.download('punkt')  # Downloads the punkt tokenizer from NLTK
-```
-
-#### Step 4: Run the Analysis Code
-
-1. In a new cell, paste the main analysis code provided.
-2. Ensure the code points to the correct directory (`/content/drive/MyDrive/TextFiles`).
-3. Run this cell to start the analysis on all uploaded files.
-
-### Expected Output
-
-Upon running, the code will analyze all files in the `TextFiles` folder. For each file, it will output details on readability, structural elements, sentiment, and uppercase word usage. The output will display results sequentially for each of the 8 files, with clear section separators, as shown below:
-
-```markdown
-==================================================
-Analyzing: stackoverflow1.txt
-==================================================
-
-Complexity and Readability:
-- Number of sentences      : 28
-- Number of words          : 680
-- Average sentence length  : 25.64 words
-- Unique words ratio       : 0.46
-- Flesch-Kincaid score     : 12.60
-
-Structural Elements:
-- Bullet points            : 0
-- Code blocks              : 0
-- Numbered items           : 0
-
-Sentiment Analysis:
-- Polarity (emotion)       : 0.20 (range -1 to 1)
-- Subjectivity             : 0.41 (range 0 to 1)
-
-Uppercase Words Analysis:
-- Uppercase words count    : 21
-- Uppercase words ratio    : 0.03
-
-Sample Sentences:
-- Enterprise 2024.7:
-- Empower your subject matter experts to contribute
-This release introduces Subject Matter Expert (SME) Auto-Assign to the Stack Overflow for Teams experience so expert knowledge is automatically captured, verified, and distributed to users.
-
-==================================================
-```
-
-The analysis will continue similarly for all 8 files, covering the four text categories.
-
-**Notes**
-- The analysis is designed to run through all uploaded files in one go, providing comprehensive results for each file.
-- Each text file’s results will display sentence and word counts, readability scores, sentiment analysis, uppercase usage, and example sentences.
-- The code is designed for English-language text analysis; adjustments may be needed for other languages.
-
 ## 4. Comparison Results Analysis Tool
 
 The **Comparison Results Analysis Tool** is a command-line application designed to help users quickly filter and analyze sentences extracted from reviews containing comparative statements.
